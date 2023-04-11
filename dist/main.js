@@ -16,14 +16,45 @@
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"test\": () => (/* binding */ test)\n/* harmony export */ });\nconsole.log('TEST');\n\nfunction test() {\n  console.log('testing');\n}\n\ntest();\n\n\n//# sourceURL=webpack://my-webpack-project/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _test__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./test */ \"./src/test.js\");\n\n\nconsole.log('TEST'); // works\n\n(0,_test__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(); // works\n\nconst testBtn = document.querySelector('button');\ntestBtn.addEventListener('click', () => (0,_test__WEBPACK_IMPORTED_MODULE_0__[\"default\"])()); // also works\n\n// But calling test() from the browser console does not.\n\n\n//# sourceURL=webpack://my-webpack-project/./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/test.js":
+/*!*********************!*\
+  !*** ./src/test.js ***!
+  \*********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nfunction test() {\n  console.log('testing');\n}\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (test);\n\n\n//# sourceURL=webpack://my-webpack-project/./src/test.js?");
 
 /***/ })
 
 /******/ 	});
 /************************************************************************/
-/******/ 	// The require scope
-/******/ 	var __webpack_require__ = {};
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
 /******/ 	
 /************************************************************************/
 /******/ 	/* webpack/runtime/define property getters */
@@ -59,8 +90,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
-/******/ 	var __webpack_exports__ = {};
-/******/ 	__webpack_modules__["./src/index.js"](0, __webpack_exports__, __webpack_require__);
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/index.js");
 /******/ 	
 /******/ })()
 ;

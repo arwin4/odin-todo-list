@@ -1,7 +1,10 @@
-console.log('TEST');
+import test from './test';
 
-export function test() {
-  console.log('testing');
-}
+console.log('TEST'); // works
 
-test();
+test(); // works
+
+const testBtn = document.querySelector('button');
+testBtn.addEventListener('click', () => test()); // also works
+
+// But calling test() from the browser console does not.
