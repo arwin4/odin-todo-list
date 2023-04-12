@@ -1,10 +1,5 @@
-import test from './test';
+import newTask from './task';
 
-console.log('TEST'); // works
-
-test(); // works
-
-const testBtn = document.querySelector('button');
-testBtn.addEventListener('click', () => test()); // also works
-
-// But calling test() from the browser console does not.
+const task1 = newTask('name of task 1');
+task1.setName('newname');
+console.log(task1.getName());
