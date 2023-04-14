@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid';
 
-const newTask = function newTask(name, description, priority, dueDate) {
+const taskFactory = function taskFactory(name, description, priority, dueDate) {
   let taskName = name;
   let taskDescription = description;
   let taskPriority = priority;
@@ -45,7 +45,7 @@ const newTask = function newTask(name, description, priority, dueDate) {
   };
 };
 
-const newProject = function newProject(name) {
+const projectFactory = function projectFactory(name) {
   let projectName = name;
   const tasks = [];
   const id = uuid();
@@ -80,4 +80,4 @@ const projectManager = function projectManager() {
   // delete project
 };
 
-export { newTask, newProject };
+export { taskFactory, projectFactory };
