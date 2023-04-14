@@ -11,6 +11,12 @@ const newTask = function newTask(
   let taskDueDate = dueDate;
   let taskProject = project;
 
+  let done = false;
+
+  const toggleStatus = () => {
+    done = !done;
+  };
+
   // Get task properties
   const getName = () => taskName;
   const getDescription = () => taskDescription;
@@ -46,6 +52,7 @@ const newTask = function newTask(
     setPriority,
     setDueDate,
     setProject,
+    toggleStatus,
   };
 };
 
