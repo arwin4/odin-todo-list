@@ -5,6 +5,7 @@ const taskFactory = function taskFactory(name, description, priority, dueDate) {
   let taskDescription = description;
   let taskPriority = priority;
   let taskDueDate = dueDate;
+  const id = uuid();
 
   let done = false;
 
@@ -17,6 +18,7 @@ const taskFactory = function taskFactory(name, description, priority, dueDate) {
   const getDescription = () => taskDescription;
   const getPriority = () => taskPriority;
   const getDueDate = () => taskDueDate;
+  const getID = () => id;
 
   // Set task properties
   const setName = (string) => {
@@ -37,6 +39,7 @@ const taskFactory = function taskFactory(name, description, priority, dueDate) {
     getDescription,
     getPriority,
     getDueDate,
+    getID,
     setName,
     setDescription,
     setPriority,
