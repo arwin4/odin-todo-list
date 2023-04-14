@@ -65,9 +65,7 @@ const projectFactory = function projectFactory(name) {
     projectName = string;
   };
 
-  const addTask = (task) => {
-    tasks.push(task);
-  };
+  const addTask = (task) => tasks.push(task);
 
   return {
     setName,
@@ -78,9 +76,16 @@ const projectFactory = function projectFactory(name) {
   };
 };
 
-const projectManager = function projectManager() {
-  // add project
-  // delete project
-};
+const projectManager = (() => {
+  const projects = [];
 
-export { taskFactory, projectFactory };
+  function addProject(name) {
+    const newProject = projectFactory(name);
+    projects.push(newProject);
+  }
+  // delete project
+
+  return { addProject };
+})();
+
+export { taskFactory, projectFactory, projectManager };

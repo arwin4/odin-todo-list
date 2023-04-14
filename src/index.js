@@ -1,4 +1,4 @@
-import { taskFactory, projectFactory } from './task';
+import { taskFactory, projectFactory, projectManager } from './task';
 
 const task1 = taskFactory('name of task 1');
 task1.setName('newname');
