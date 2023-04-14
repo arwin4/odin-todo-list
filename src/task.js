@@ -53,6 +53,11 @@ const projectFactory = function projectFactory(name) {
   const tasks = [];
   const id = uuid();
 
+  function addTask(task) {
+    const newTask = taskFactory(task);
+    tasks.push(newTask);
+  }
+
   // Delete task by name
 
   // Get project properties
@@ -64,8 +69,6 @@ const projectFactory = function projectFactory(name) {
   const setName = (string) => {
     projectName = string;
   };
-
-  const addTask = (task) => tasks.push(task);
 
   return {
     setName,
