@@ -2,14 +2,18 @@ import { projectManager } from './task';
 
 const removeTaskObject = (project, task) => project.deleteTask(task.getID());
 
-const projectContainer = document.querySelector('.projects-container');
+function DOMnode() {
+  return {
+    projectContainer: document.querySelector('.projects-container'),
+  };
+}
 
 function renderTasks(project, renderProjectsContainer) {
   const tasks = project.getTasks();
   Object.values(tasks).forEach((task) => {
     const taskName = document.createElement('p');
     taskName.textContent = task.getName();
-    projectContainer.appendChild(taskName);
+    DOMnode().projectContainer.appendChild(taskName);
 
     // Render delete button
     const deleteBtn = document.createElement('button');
@@ -20,7 +24,7 @@ function renderTasks(project, renderProjectsContainer) {
       // Re-render projects container
       renderProjectsContainer();
     });
-    projectContainer.appendChild(deleteBtn);
+    DOMnode().projectContainer.appendChild(deleteBtn);
   });
 }
 
@@ -29,14 +33,14 @@ function renderProjects() {
   // made to the data. Not efficient.
 
   // Clear the container for render
-  projectContainer.replaceChildren();
+  DOMnode().projectContainer.replaceChildren();
 
   const projects = projectManager.getProjects();
   Object.values(projects).forEach((project) => {
     // Render the project names
     const projectName = document.createElement('h2');
     projectName.textContent = project.getName();
-    projectContainer.appendChild(projectName);
+    DOMnode().projectContainer.appendChild(projectName);
 
     // Render the tasks inside the projects
     renderTasks(project, renderProjects);
