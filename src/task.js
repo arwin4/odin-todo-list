@@ -100,7 +100,7 @@ const projectFactory = function projectFactory(name) {
 };
 
 const projectManager = (() => {
-  const projects = [];
+  let projects = [];
 
   function addProject(name) {
     const newProject = projectFactory(name);
@@ -108,10 +108,15 @@ const projectManager = (() => {
     return newProject;
   }
 
+  function deleteProject(projectToDelete) {
+    const id = projectToDelete.getID();
+    projects = projects.filter((project) => project.getID() !== id);
+  }
+
   const getProjects = () => projects;
   // delete project
 
-  return { addProject, getProjects };
+  return { addProject, deleteProject, getProjects };
 })();
 
 export { taskFactory, projectFactory, projectManager };

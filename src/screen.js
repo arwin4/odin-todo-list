@@ -10,6 +10,8 @@ function DOM() {
 const removeTask = (project, task) => project.deleteTask(task.getID());
 const addTask = (project) => project.addTask('Another task');
 
+const deleteProject = (project) => projectManager.deleteProject(project);
+
 function renderTasks(project, renderProjectsContainer) {
   const tasks = project.getTasks();
   Object.values(tasks).forEach((task) => {
@@ -42,6 +44,15 @@ function renderProjects() {
     const projectName = document.createElement('h2');
     projectName.textContent = project.getName();
     DOM().projectContainer.appendChild(projectName);
+
+    // Render delete button
+    const deleteBtn = document.createElement('button');
+    deleteBtn.textContent = 'Delete project';
+    deleteBtn.addEventListener('click', () => {
+      deleteProject(project);
+      renderProjects();
+    });
+    DOM().projectContainer.appendChild(deleteBtn);
 
     // Render new task button
     const newTaskBtn = document.createElement('button');
