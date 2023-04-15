@@ -1,6 +1,7 @@
 import { projectManager } from './task';
 
 function DOM() {
+  // DOM element getter
   return {
     projectContainer: document.querySelector('.projects-container'),
   };
@@ -12,6 +13,7 @@ const addTask = (project) => project.addTask('Another task');
 function renderTasks(project, renderProjectsContainer) {
   const tasks = project.getTasks();
   Object.values(tasks).forEach((task) => {
+    // Render task names
     const taskName = document.createElement('p');
     taskName.textContent = task.getName();
     DOM().projectContainer.appendChild(taskName);
@@ -20,9 +22,7 @@ function renderTasks(project, renderProjectsContainer) {
     const deleteBtn = document.createElement('button');
     deleteBtn.textContent = 'Delete task';
     deleteBtn.addEventListener('click', () => {
-      // Delete task in project object
       removeTaskObject(project, task);
-      // Re-render projects container
       renderProjectsContainer();
     });
     DOM().projectContainer.appendChild(deleteBtn);
@@ -38,11 +38,12 @@ function renderProjects() {
 
   const projects = projectManager.getProjects();
   Object.values(projects).forEach((project) => {
-    // Render the project names
+    // Render project names
     const projectName = document.createElement('h2');
     projectName.textContent = project.getName();
     DOM().projectContainer.appendChild(projectName);
 
+    // Render new task button
     const newTaskBtn = document.createElement('button');
     newTaskBtn.textContent = 'Add new task';
     newTaskBtn.addEventListener('click', () => {
