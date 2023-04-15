@@ -73,9 +73,9 @@ const projectFactory = function projectFactory(name) {
     return newTask;
   }
 
-  // Delete task by ID
-  // Mutates the array!
-  function deleteTask(id) {
+  function deleteTask(taskToDelete) {
+    // Mutates the array!
+    const id = taskToDelete.getID();
     tasks = tasks.filter((task) => task.getID() !== id);
   }
 
@@ -109,6 +109,7 @@ const projectManager = (() => {
   }
 
   function deleteProject(projectToDelete) {
+    // Mutates the array!
     const id = projectToDelete.getID();
     projects = projects.filter((project) => project.getID() !== id);
   }
