@@ -4,6 +4,26 @@ const removeTaskObject = (project, task) => project.deleteTask(task.getID());
 
 const projectContainer = document.querySelector('.projects-container');
 
+function renderTasks(project, renderProjectsContainer) {
+  const tasks = project.getTasks();
+  Object.values(tasks).forEach((task) => {
+    const taskName = document.createElement('p');
+    taskName.textContent = task.getName();
+    projectContainer.appendChild(taskName);
+
+    // Render delete button
+    const deleteBtn = document.createElement('button');
+    deleteBtn.textContent = 'Delete task';
+    deleteBtn.addEventListener('click', () => {
+      // Delete task in project object
+      removeTaskObject(project, task);
+      // Re-render projects container
+      renderProjectsContainer();
+    });
+    projectContainer.appendChild(deleteBtn);
+  });
+}
+
 function renderProjects() {
   // The projects (and tasks) are re-rendered completely every time a change is
   // made to the data. Not efficient.
@@ -19,23 +39,7 @@ function renderProjects() {
     projectContainer.appendChild(projectName);
 
     // Render the tasks inside the projects
-    const tasks = project.getTasks();
-    Object.values(tasks).forEach((task) => {
-      const taskName = document.createElement('p');
-      taskName.textContent = task.getName();
-      projectContainer.appendChild(taskName);
-
-      // Render delete button
-      const deleteBtn = document.createElement('button');
-      deleteBtn.textContent = 'Delete task';
-      deleteBtn.addEventListener('click', () => {
-        // Delete task in project object
-        removeTaskObject(project, task);
-        // Re-render
-        renderProjects();
-      });
-      projectContainer.appendChild(deleteBtn);
-    });
+    renderTasks(project, renderProjects);
   });
 }
 
