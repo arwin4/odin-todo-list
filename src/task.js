@@ -1,6 +1,13 @@
 import { v4 as uuid } from 'uuid';
 
-const taskFactory = function taskFactory(name, description, priority, dueDate) {
+const taskFactory = function taskFactory(
+  project,
+  name = 'Task',
+  description = '',
+  priority = 'normal',
+  dueDate = 'PLACEHOLDER',
+) {
+  let projectID = project;
   let taskName = name;
   let taskDescription = description;
   let taskPriority = priority;
@@ -14,6 +21,7 @@ const taskFactory = function taskFactory(name, description, priority, dueDate) {
   };
 
   // Get task properties
+  const getProject = () => projectID;
   const getName = () => taskName;
   const getDescription = () => taskDescription;
   const getPriority = () => taskPriority;
@@ -21,6 +29,10 @@ const taskFactory = function taskFactory(name, description, priority, dueDate) {
   const getID = () => id;
 
   // Set task properties
+  const setProject = (string) => {
+    projectID = string;
+  };
+
   const setName = (string) => {
     taskName = string;
   };
@@ -35,11 +47,13 @@ const taskFactory = function taskFactory(name, description, priority, dueDate) {
   };
 
   return {
+    getProject,
     getName,
     getDescription,
     getPriority,
     getDueDate,
     getID,
+    setProject,
     setName,
     setDescription,
     setPriority,
@@ -50,20 +64,25 @@ const taskFactory = function taskFactory(name, description, priority, dueDate) {
 
 const projectFactory = function projectFactory(name) {
   let projectName = name;
-  const tasks = [];
-  const id = uuid();
+  let tasks = [];
+  const projectID = uuid();
 
-  function addTask(task) {
-    const newTask = taskFactory(task);
+  function addTask(taskName) {
+    const newTask = taskFactory(projectID, taskName);
     tasks.push(newTask);
+    return newTask;
   }
 
-  // Delete task by name
+  // Delete task by ID
+  // Mutates the array!
+  function deleteTask(id) {
+    tasks = tasks.filter((task) => task.getID() !== id);
+  }
 
   // Get project properties
   const getName = () => projectName;
   const getTasks = () => tasks;
-  const getID = () => id;
+  const getID = () => projectID;
 
   // Set project properties
   const setName = (string) => {
@@ -73,6 +92,7 @@ const projectFactory = function projectFactory(name) {
   return {
     setName,
     addTask,
+    deleteTask,
     getName,
     getTasks,
     getID,
@@ -85,10 +105,13 @@ const projectManager = (() => {
   function addProject(name) {
     const newProject = projectFactory(name);
     projects.push(newProject);
+    return newProject;
   }
+
+  const getProjects = () => projects;
   // delete project
 
-  return { addProject };
+  return { addProject, getProjects };
 })();
 
 export { taskFactory, projectFactory, projectManager };
