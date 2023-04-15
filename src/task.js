@@ -5,7 +5,7 @@ const taskFactory = function taskFactory(
   name = 'Task',
   description = '',
   priority = 'normal',
-  dueDate = 'PLACEHOLDER',
+  dueDate = new Date(),
 ) {
   let projectID = project;
   let taskName = name;
@@ -42,8 +42,8 @@ const taskFactory = function taskFactory(
   const setPriority = (string) => {
     taskPriority = string;
   };
-  const setDueDate = (string) => {
-    taskDueDate = string;
+  const setDueDate = (date) => {
+    taskDueDate = date;
   };
 
   return {

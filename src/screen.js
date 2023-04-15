@@ -1,3 +1,4 @@
+import { format } from 'date-fns';
 import { projectManager } from './task';
 
 function DOM() {
@@ -14,13 +15,43 @@ const addTask = (project) => project.addTask('Another task');
 const deleteProject = (project) => projectManager.deleteProject(project);
 const addProject = () => projectManager.addProject('Another project');
 
+function changeDueDate(task, changeDateBtn, renderProjectsContainer) {
+  const datePicker = document.createElement('input');
+  datePicker.setAttribute('type', 'date');
+  // Set date to current date
+  datePicker.setAttribute('value', format(new Date(), 'yyyy-MM-dd'));
+  datePicker.addEventListener('change', (e) => {
+    const date = e.target.valueAsDate;
+    task.setDueDate(date);
+    renderProjectsContainer();
+  });
+  changeDateBtn.replaceWith(datePicker);
+}
+
 function renderTasks(project, renderProjectsContainer) {
+  // The projects (and tasks) are re-rendered completely every time a change is
+  // made to the data. Not efficient.
+
   const tasks = project.getTasks();
   Object.values(tasks).forEach((task) => {
     // Render task names
     const taskName = document.createElement('p');
     taskName.textContent = task.getName();
     DOM().projectContainer.appendChild(taskName);
+
+    // Render task due date
+    const dueDate = document.createElement('p');
+    const date = task.getDueDate();
+    dueDate.textContent = format(date, 'PP');
+    DOM().projectContainer.appendChild(dueDate);
+
+    // Render due date change button
+    const changeDateBtn = document.createElement('button');
+    changeDateBtn.textContent = 'Change due date';
+    changeDateBtn.addEventListener('click', () => {
+      changeDueDate(task, changeDateBtn, renderProjectsContainer);
+    });
+    DOM().projectContainer.appendChild(changeDateBtn);
 
     // Render delete button
     const deleteBtn = document.createElement('button');
