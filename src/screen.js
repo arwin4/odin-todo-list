@@ -7,7 +7,7 @@ function DOM() {
   };
 }
 
-const removeTaskObject = (project, task) => project.deleteTask(task.getID());
+const removeTask = (project, task) => project.deleteTask(task.getID());
 const addTask = (project) => project.addTask('Another task');
 
 function renderTasks(project, renderProjectsContainer) {
@@ -22,7 +22,7 @@ function renderTasks(project, renderProjectsContainer) {
     const deleteBtn = document.createElement('button');
     deleteBtn.textContent = 'Delete task';
     deleteBtn.addEventListener('click', () => {
-      removeTaskObject(project, task);
+      removeTask(project, task);
       renderProjectsContainer();
     });
     DOM().projectContainer.appendChild(deleteBtn);
