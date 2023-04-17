@@ -1,0 +1,41 @@
+::selection {
+  color: black;
+  background: #ff6550;
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+
+  background-color: #566270;
+
+  font-family: 'Noto Sans', system-ui, -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
+    sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.projects-container {
+  display: flex;
+  flex-direction: row;
+  column-gap: 20px;
+}
+
+/* Projects start */
+.project .card {
+  display: grid;
+  align-items: center;
+
+  font-size: 0.9rem;
+  color: #ffffff;
+
+  background: linear-gradient(rgb(117, 128, 141) 0%, rgb(104, 116, 129) 100%);
+  padding: 10px 10px;
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.75);
+  border-left: 3px solid #ff6550;
+}
+/* Projects end */

@@ -5,7 +5,34 @@
     <title>Todo list</title>
   <script defer src="main.js"></script></head>
   <body>
-    <div class="content"></div>
-    <div class="projects-container"></div>
+    <div class="content">
+      <form class="new-project-form">
+        <input type="text" class="new-project-input" />
+      </form>
+      <div class="projects-container"></div>
+    </div>
   </body>
+
+  <!-- Templates -->
+  <template class="project-template">
+    <div class="project card">
+      <h1 class="project-name">Project title</h1>
+      <div class="project-controls">
+        <button class="delete-project">Delete project</button>
+        <form class="new-task-form">
+          <input type="text" class="new-task-input" />
+        </form>
+      </div>
+      <div class="task-container"></div>
+    </div>
+  </template>
+
+  <template class="task-template">
+    <div class="task card">
+      <h2 class="task-name">Task Name</h2>
+      <p class="description">description</p>
+      <p class="priority">priority</p>
+      <p class="duedate">duedate</p>
+    </div>
+  </template>
 </html>

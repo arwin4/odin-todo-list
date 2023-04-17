@@ -2,15 +2,20 @@ import { format } from 'date-fns';
 import { projectManager } from './task';
 
 function DOM() {
-  // DOM element getter
+  // DOM element reference
   return {
+    // Templates
+    taskTemplate: document.querySelector('.task-template'),
+    projectTemplate: document.querySelector('.project-template'),
+
+    // Containers
     contentContainer: document.querySelector('.content'),
     projectContainer: document.querySelector('.projects-container'),
   };
 }
 
 const deleteTask = (project, task) => project.deleteTask(task);
-const addTask = (project) => project.addTask('Another task');
+const addTask = (project, newTaskName) => project.addTask(newTaskName.value);
 
 const deleteProject = (project) => projectManager.deleteProject(project);
 const addProject = () => projectManager.addProject('Another project');
@@ -28,88 +33,77 @@ function changeDueDate(task, changeDateBtn, renderProjectsContainer) {
   changeDateBtn.replaceWith(datePicker);
 }
 
-function renderTasks(project, renderProjectsContainer) {
-  // The projects (and tasks) are re-rendered completely every time a change is
-  // made to the data. Not efficient.
+function renderTasks(project, projectCard) {
+  const taskContainer = projectCard.querySelector('.task-container');
+
+  // Clear the task container
+  taskContainer.replaceChildren();
 
   const tasks = project.getTasks();
   Object.values(tasks).forEach((task) => {
-    // Render task names
-    const taskName = document.createElement('p');
-    taskName.textContent = task.getName();
-    DOM().projectContainer.appendChild(taskName);
+    // Create task card
+    const { taskTemplate } = DOM();
+    const taskCard = taskTemplate.content.firstElementChild.cloneNode(true);
 
-    // Render task due date
-    const dueDate = document.createElement('p');
-    const date = task.getDueDate();
-    dueDate.textContent = format(date, 'PP');
-    DOM().projectContainer.appendChild(dueDate);
+    // Render task properties
+    taskCard.querySelector('.task-name').textContent = task.getName();
+    // TODO: description, priority, etc...
 
-    // Render due date change button
-    const changeDateBtn = document.createElement('button');
-    changeDateBtn.textContent = 'Change due date';
-    changeDateBtn.addEventListener('click', () => {
-      changeDueDate(task, changeDateBtn, renderProjectsContainer);
-    });
-    DOM().projectContainer.appendChild(changeDateBtn);
+    taskContainer.appendChild(taskCard);
+  });
+}
 
-    // Render delete button
-    const deleteBtn = document.createElement('button');
-    deleteBtn.textContent = 'Delete task';
-    deleteBtn.addEventListener('click', () => {
-      deleteTask(project, task);
-      renderProjectsContainer();
-    });
-    DOM().projectContainer.appendChild(deleteBtn);
+function activateProjectControls(projectCard, project) {
+  // Activate delete project button
+  const deleteBtn = projectCard.querySelector('.delete-project');
+  deleteBtn.addEventListener('click', () => {
+    deleteProject(project);
+    projectCard.remove();
+  });
+
+  // Activate new task input
+  const newTaskForm = projectCard.querySelector('.new-task-form');
+  const newTaskName = projectCard.querySelector('.new-task-input');
+  newTaskForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    addTask(project, newTaskName);
+    renderTasks(project, projectCard);
   });
 }
 
 function renderProjects() {
-  // The projects (and tasks) are re-rendered completely every time a change is
-  // made to the data. Not efficient.
-
-  // Clear the container for render
+  // Clear the project container
   DOM().projectContainer.replaceChildren();
 
   const projects = projectManager.getProjects();
   Object.values(projects).forEach((project) => {
-    // Render project names
-    const projectName = document.createElement('h2');
-    projectName.textContent = project.getName();
-    DOM().projectContainer.appendChild(projectName);
+    // Create project card
+    const templateCard = document.querySelector('.project-template');
+    const projectCard = templateCard.content.firstElementChild.cloneNode(true);
 
-    // Render delete button
-    const deleteBtn = document.createElement('button');
-    deleteBtn.textContent = 'Delete project';
-    deleteBtn.addEventListener('click', () => {
-      deleteProject(project);
-      renderProjects();
-    });
-    DOM().projectContainer.appendChild(deleteBtn);
+    // Render project name
+    projectCard.querySelector('.project-name').textContent = project.getName();
 
-    // Render new task button
-    const newTaskBtn = document.createElement('button');
-    newTaskBtn.textContent = 'Add new task';
-    newTaskBtn.addEventListener('click', () => {
-      addTask(project);
-      renderProjects();
-    });
-    DOM().projectContainer.appendChild(newTaskBtn);
+    renderTasks(project, projectCard);
 
-    // Render the tasks inside the projects
-    renderTasks(project, renderProjects);
+    activateProjectControls(projectCard, project);
+
+    DOM().projectContainer.appendChild(projectCard);
+  });
+}
+
+function activatePageControls() {
+  const newProjectForm = document.querySelector('.new-project-form');
+  const newProjectName = document.querySelector('.new-project-input');
+  newProjectForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    projectManager.addProject(newProjectName.value);
+    renderProjects();
   });
 }
 
 function renderPage() {
-  const addProjectBtn = document.createElement('button');
-  addProjectBtn.textContent = 'Add new project';
-  addProjectBtn.addEventListener('click', () => {
-    addProject();
-    renderProjects();
-  });
-  DOM().contentContainer.appendChild(addProjectBtn);
-
+  activatePageControls();
   renderProjects();
 }
 
