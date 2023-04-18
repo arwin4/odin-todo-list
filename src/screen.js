@@ -25,9 +25,10 @@ function taskDOM(taskCard) {
 
 // Data change functions
 // Tasks
+const setDueDate = (date, task) => task.setDueDate(date);
+// Projects
 const deleteTask = (task, project) => project.deleteTask(task);
 const addTask = (newName, project) => project.addTask(newName.value);
-// Projects
 const deleteProject = (project) => projectManager.deleteProject(project);
 const addProject = (newName) => projectManager.addProject(newName.value);
 
@@ -60,7 +61,7 @@ function changeDueDate(task, changeDateBtn, taskCard) {
   datePicker.addEventListener('change', (e) => {
     // Set new date internally
     const date = e.target.valueAsDate;
-    task.setDueDate(date);
+    setDueDate(date, task);
 
     // Update displayed date
     renderDate(task, taskCard);
