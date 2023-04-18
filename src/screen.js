@@ -144,7 +144,6 @@ function activatePageControls() {
   const newProjectName = document.querySelector('.new-project-input');
   newProjectForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    // projectManager.addProject(newProjectName.value);
     addProject(newProjectName);
     renderProjects();
   });
