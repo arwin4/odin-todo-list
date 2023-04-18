@@ -137,6 +137,7 @@ function activateProjectControls(projectCard, project) {
     e.preventDefault();
     addTask(newTaskName, project);
     renderTasks(project, projectCard);
+    newTaskName.value = '';
   });
 }
 
@@ -168,6 +169,7 @@ function activatePageControls() {
     e.preventDefault();
     addProject(newProjectName);
     renderProjects();
+    newProjectName.value = '';
   });
 }
 
