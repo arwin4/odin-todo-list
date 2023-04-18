@@ -5,7 +5,7 @@ const taskFactory = function taskFactory(
   name = 'Task',
   description = 'Description',
   priority = 'normal',
-  dueDate = new Date(),
+  dueDate = new Date(), // today
 ) {
   let projectID = project;
   let taskName = name;
