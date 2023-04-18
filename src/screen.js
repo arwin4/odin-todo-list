@@ -2,7 +2,7 @@ import { format } from 'date-fns';
 import { projectManager } from './task';
 
 function DOM() {
-  // DOM element reference
+  // Global DOM element reference
   return {
     // Templates
     taskTemplate: document.querySelector('.task-template'),
@@ -14,23 +14,66 @@ function DOM() {
   };
 }
 
-const deleteTask = (project, task) => project.deleteTask(task);
-const addTask = (project, newTaskName) => project.addTask(newTaskName.value);
+function taskDOM(taskCard) {
+  // Task card element reference
+  return {
+    nameElem: taskCard.querySelector('.task-name'),
+    descriptionElem: taskCard.querySelector('.duedate'),
+    priorirtyElem: taskCard.querySelector('.priority'),
+  };
+}
 
+// Data change functions
+// Tasks
+const deleteTask = (task, project) => project.deleteTask(task);
+const addTask = (newName, project) => project.addTask(newName.value);
+// Projects
 const deleteProject = (project) => projectManager.deleteProject(project);
-const addProject = () => projectManager.addProject('Another project');
+const addProject = (newName) => projectManager.addProject(newName.value);
 
-function changeDueDate(task, changeDateBtn, renderProjectsContainer) {
+function renderDate(task, taskCard) {
+  taskDOM(taskCard).descriptionElem.textContent = format(
+    task.getDueDate(),
+    'PP', // Semi-short date format
+  );
+}
+
+function changeDueDate(task, changeDateBtn, taskCard) {
+  // Show the datepicker
   const datePicker = document.createElement('input');
   datePicker.setAttribute('type', 'date');
-  // Set date to current date
-  datePicker.setAttribute('value', format(new Date(), 'yyyy-MM-dd'));
+  changeDateBtn.after(datePicker);
+  datePicker.showPicker();
+
   datePicker.addEventListener('change', (e) => {
+    // Set new date internally
     const date = e.target.valueAsDate;
     task.setDueDate(date);
-    renderProjectsContainer();
+
+    // Update displayed date
+    renderDate(task, taskCard);
+    datePicker.remove();
+
+    // Re-enable the change date button
+    const dateButton = changeDateBtn;
+    dateButton.disabled = false;
   });
-  changeDateBtn.replaceWith(datePicker);
+}
+
+function activateTaskControls(task, project, taskCard) {
+  // Activate task delete button
+  const deleteBtn = taskCard.querySelector('.delete-task');
+  deleteBtn.addEventListener('click', () => {
+    deleteTask(task, project);
+    taskCard.remove();
+  });
+
+  // Activate change due date button
+  const changeDateBtn = taskCard.querySelector('.change-duedate');
+  changeDateBtn.addEventListener('click', () => {
+    changeDueDate(task, changeDateBtn, taskCard);
+    changeDateBtn.disabled = true;
+  });
 }
 
 function renderTasks(project, projectCard) {
@@ -46,8 +89,12 @@ function renderTasks(project, projectCard) {
     const taskCard = taskTemplate.content.firstElementChild.cloneNode(true);
 
     // Render task properties
-    taskCard.querySelector('.task-name').textContent = task.getName();
-    // TODO: description, priority, etc...
+    taskDOM(taskCard).nameElem.textContent = task.getName();
+    taskDOM(taskCard).descriptionElem.textContent = task.getDescription();
+    taskDOM(taskCard).priorirtyElem.textContent = task.getPriority();
+    renderDate(task, taskCard);
+
+    activateTaskControls(task, project, taskCard);
 
     taskContainer.appendChild(taskCard);
   });
@@ -66,7 +113,7 @@ function activateProjectControls(projectCard, project) {
   const newTaskName = projectCard.querySelector('.new-task-input');
   newTaskForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    addTask(project, newTaskName);
+    addTask(newTaskName, project);
     renderTasks(project, projectCard);
   });
 }
@@ -97,7 +144,8 @@ function activatePageControls() {
   const newProjectName = document.querySelector('.new-project-input');
   newProjectForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    projectManager.addProject(newProjectName.value);
+    // projectManager.addProject(newProjectName.value);
+    addProject(newProjectName);
     renderProjects();
   });
 }
