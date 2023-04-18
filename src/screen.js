@@ -45,6 +45,18 @@ function changeDueDate(task, changeDateBtn, taskCard) {
   changeDateBtn.after(datePicker);
   datePicker.showPicker();
 
+  // Show cancel putton
+  const cancelBtn = document.createElement('button');
+  cancelBtn.textContent = 'Cancel date change';
+  datePicker.after(cancelBtn);
+
+  cancelBtn.addEventListener('click', () => {
+    datePicker.remove();
+    cancelBtn.remove();
+    const dateBtn = changeDateBtn;
+    dateBtn.disabled = false;
+  });
+
   datePicker.addEventListener('change', (e) => {
     // Set new date internally
     const date = e.target.valueAsDate;
@@ -55,8 +67,11 @@ function changeDueDate(task, changeDateBtn, taskCard) {
     datePicker.remove();
 
     // Re-enable the change date button
-    const dateButton = changeDateBtn;
-    dateButton.disabled = false;
+    const dateBtn = changeDateBtn;
+    dateBtn.disabled = false;
+
+    // Remove cancel button
+    cancelBtn.remove();
   });
 }
 
