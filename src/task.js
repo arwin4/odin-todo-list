@@ -3,7 +3,7 @@ import { v4 as uuid } from 'uuid';
 const taskFactory = function taskFactory(
   project,
   name = 'Task',
-  description = '',
+  description = 'Description',
   priority = 'normal',
   dueDate = new Date(),
 ) {
