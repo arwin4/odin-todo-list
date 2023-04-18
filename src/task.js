@@ -42,8 +42,14 @@ const taskFactory = function taskFactory(
   const setPriority = (string) => {
     taskPriority = string;
   };
-  const setDueDate = (date) => {
-    taskDueDate = date;
+  const setDueDate = (newDate) => {
+    // Only accept current or later date
+    const newDateDay = newDate.setHours(0, 0, 0, 0);
+    if (newDateDay < new Date().setHours(0, 0, 0, 0)) {
+      return false;
+    }
+    taskDueDate = newDate;
+    return true;
   };
 
   return {

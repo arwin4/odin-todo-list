@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import { format } from 'date-fns';
 import { projectManager } from './task';
 
@@ -61,7 +62,12 @@ function changeDueDate(task, changeDateBtn, taskCard) {
   datePicker.addEventListener('change', (e) => {
     // Set new date internally
     const date = e.target.valueAsDate;
-    setDueDate(date, task);
+    if (!setDueDate(date, task)) {
+      alert(
+        `Sorry, you can't pick a date in the past for your task.
+You've got to be more realistic about your goals!`,
+      );
+    }
 
     // Update displayed date
     renderDate(task, taskCard);
