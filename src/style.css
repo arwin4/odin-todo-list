@@ -39,3 +39,6 @@ a {
   border-left: 3px solid #ff6550;
 }
 /* Projects end */
+.date {
+  display: flex;
+}
