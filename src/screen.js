@@ -47,14 +47,14 @@ function changeDueDate(task, changeDateBtn, taskCard) {
 
   // Show cancel putton
   const cancelBtn = document.createElement('button');
-  cancelBtn.textContent = 'Cancel date change';
+  cancelBtn.textContent = 'Cancel change';
   datePicker.after(cancelBtn);
 
   cancelBtn.addEventListener('click', () => {
     datePicker.remove();
     cancelBtn.remove();
     const dateBtn = changeDateBtn;
-    dateBtn.disabled = false;
+    dateBtn.hidden = false;
   });
 
   datePicker.addEventListener('change', (e) => {
@@ -68,7 +68,7 @@ function changeDueDate(task, changeDateBtn, taskCard) {
 
     // Re-enable the change date button
     const dateBtn = changeDateBtn;
-    dateBtn.disabled = false;
+    dateBtn.hidden = false;
 
     // Remove cancel button
     cancelBtn.remove();
@@ -86,8 +86,8 @@ function activateTaskControls(task, project, taskCard) {
   // Activate change due date button
   const changeDateBtn = taskCard.querySelector('.change-duedate');
   changeDateBtn.addEventListener('click', () => {
+    changeDateBtn.hidden = true;
     changeDueDate(task, changeDateBtn, taskCard);
-    changeDateBtn.disabled = true;
   });
 }
 
