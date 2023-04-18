@@ -47,7 +47,7 @@ summary > * {
   display: inline;
 }
 
-:root {
+.task.card {
   --card-padding: 10px 15px;
 }
 
