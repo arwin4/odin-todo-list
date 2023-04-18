@@ -47,7 +47,15 @@ summary > * {
   display: inline;
 }
 
+:root {
+  --card-padding: 10px 15px;
+}
+
 summary {
-  padding: 10px 10px;
+  padding: var(--card-padding);
   cursor: pointer;
+}
+
+.task-content {
+  padding: var(--card-padding);
 }
