@@ -5,7 +5,6 @@
     <title>Todo list</title>
   </head>
   <body>
-    <span class="material-icons">pie_chart</span>
     <div class="content">
       <form class="new-project-form">
         <input type="text" class="new-project-input" />
@@ -19,7 +18,10 @@
     <div class="project card">
       <h1 class="project-name">Project title</h1>
       <div class="project-controls">
-        <button class="delete-project">Delete project</button>
+        <button class="delete-project">
+          <span class="material-icons">delete_forever</span>
+          Delete project
+        </button>
         <form class="new-task-form">
           <input type="text" class="new-task-input" />
         </form>
@@ -35,12 +37,17 @@
           <h2 class="task-name">Task Name</h2>
         </summary>
         <div class="task-content">
-          <button class="delete-task">Delete task</button>
+          <button class="delete-task">
+            <span class="material-icons">delete_forever</span>
+            Delete task
+          </button>
           <p class="description">description</p>
           <p class="priority">priority</p>
           <div class="date">
             <p class="duedate">duedate</p>
-            <button class="change-duedate">Change due date</button>
+            <button class="change-duedate">
+              <span class="material-icons">edit_calendar</span>
+            </button>
           </div>
         </div>
       </details>

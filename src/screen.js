@@ -1,6 +1,7 @@
 /* eslint-disable no-alert */
 import { format } from 'date-fns';
 import { projectManager } from './task';
+import 'material-icons/iconfont/material-icons.css';
 
 function DOM() {
   // Global DOM element reference
@@ -57,6 +58,7 @@ function changeDueDate(task, changeDateBtn, taskCard) {
     cancelBtn.remove();
     const dateBtn = changeDateBtn;
     dateBtn.hidden = false;
+    dateBtn.firstElementChild.hidden = false;
   });
 
   datePicker.addEventListener('change', (e) => {
@@ -76,6 +78,7 @@ You've got to be more realistic about your goals!`,
     // Re-enable the change date button
     const dateBtn = changeDateBtn;
     dateBtn.hidden = false;
+    dateBtn.firstElementChild.hidden = false;
 
     // Remove cancel button
     cancelBtn.remove();
@@ -94,6 +97,7 @@ function activateTaskControls(task, project, taskCard) {
   const changeDateBtn = taskCard.querySelector('.change-duedate');
   changeDateBtn.addEventListener('click', () => {
     changeDateBtn.hidden = true;
+    changeDateBtn.firstElementChild.hidden = true;
     changeDueDate(task, changeDateBtn, taskCard);
   });
 }

@@ -19,6 +19,16 @@ a {
   color: inherit;
 }
 
+button {
+  display: flex;
+  align-items: center;
+}
+
+*[hidden] {
+  /* Reset to make sure hidden attribute hides the element */
+  display: none;
+}
+
 .projects-container {
   display: flex;
   flex-direction: row;

@@ -1,41 +1,69 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <title>Todo list</title>
-    <script defer src="main.js"></script>
-  </head>
-  <body>
-    <div class="content">
-      <form class="new-project-form">
-        <input type="text" class="new-project-input" />
-      </form>
-      <div class="projects-container"></div>
-    </div>
-  </body>
-
-  <!-- Templates -->
-  <template class="project-template">
-    <div class="project card">
-      <h1 class="project-name">Project title</h1>
-      <div class="project-controls">
-        <button class="delete-project">Delete project</button>
-        <form class="new-task-form">
-          <input type="text" class="new-task-input" />
-        </form>
-      </div>
-      <div class="task-container"></div>
-    </div>
-  </template>
-
-  <template class="task-template">
-    <div class="task card">
-      <h2 class="task-name">Task Name</h2>
-      <button class="delete-task">Delete task</button>
-      <button class="change-duedate">Change due date</button>
-      <p class="description">description</p>
-      <p class="priority">priority</p>
-      <p class="duedate">duedate</p>
-    </div>
-  </template>
-</html>
+<head><script defer src="main.js"></script></head>Html Webpack Plugin:
+<pre>
+  Error: Child compilation failed:
+  Module not found: Error: Can't resolve '/home/user/repos/odin/js-track/odin-todo-list/index.html' in '/home/user/repos/odin/js-track/odin-todo-list'
+  ModuleNotFoundError: Module not found: Error: Can't resolve '/home/user/repos/odin/js-track/odin-todo-list/index.html' in '/home/user/repos/odin/js-t  rack/odin-todo-list'
+      at /home/user/repos/odin/js-track/odin-todo-list/node_modules/webpack/lib/Compilation.js:2016:28
+      at /home/user/repos/odin/js-track/odin-todo-list/node_modules/webpack/lib/NormalModuleFactory.js:805:13
+      at eval (eval at create (/home/user/repos/odin/js-track/odin-todo-list/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:10:1)
+      at /home/user/repos/odin/js-track/odin-todo-list/node_modules/webpack/lib/NormalModuleFactory.js:272:22
+      at eval (eval at create (/home/user/repos/odin/js-track/odin-todo-list/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:9:1)
+      at /home/user/repos/odin/js-track/odin-todo-list/node_modules/webpack/lib/NormalModuleFactory.js:436:22
+      at /home/user/repos/odin/js-track/odin-todo-list/node_modules/webpack/lib/NormalModuleFactory.js:118:11
+      at /home/user/repos/odin/js-track/odin-todo-list/node_modules/webpack/lib/NormalModuleFactory.js:677:25
+      at /home/user/repos/odin/js-track/odin-todo-list/node_modules/webpack/lib/NormalModuleFactory.js:881:8
+      at /home/user/repos/odin/js-track/odin-todo-list/node_modules/webpack/lib/NormalModuleFactory.js:1001:5
+  
+  - Compilation.js:2016 
+    [odin-todo-list]/[webpack]/lib/Compilation.js:2016:28
+  
+  - NormalModuleFactory.js:805 
+    [odin-todo-list]/[webpack]/lib/NormalModuleFactory.js:805:13
+  
+  
+  - NormalModuleFactory.js:272 
+    [odin-todo-list]/[webpack]/lib/NormalModuleFactory.js:272:22
+  
+  
+  - NormalModuleFactory.js:436 
+    [odin-todo-list]/[webpack]/lib/NormalModuleFactory.js:436:22
+  
+  - NormalModuleFactory.js:118 
+    [odin-todo-list]/[webpack]/lib/NormalModuleFactory.js:118:11
+  
+  - NormalModuleFactory.js:677 
+    [odin-todo-list]/[webpack]/lib/NormalModuleFactory.js:677:25
+  
+  - NormalModuleFactory.js:881 
+    [odin-todo-list]/[webpack]/lib/NormalModuleFactory.js:881:8
+  
+  - NormalModuleFactory.js:1001 
+    [odin-todo-list]/[webpack]/lib/NormalModuleFactory.js:1001:5
+  
+  - child-compiler.js:169 
+    [odin-todo-list]/[html-webpack-plugin]/lib/child-compiler.js:169:18
+  
+  - Compiler.js:551 finalCallback
+    [odin-todo-list]/[webpack]/lib/Compiler.js:551:5
+  
+  - Compiler.js:577 
+    [odin-todo-list]/[webpack]/lib/Compiler.js:577:11
+  
+  - Compiler.js:1196 
+    [odin-todo-list]/[webpack]/lib/Compiler.js:1196:17
+  
+  
+  - Hook.js:18 Hook.CALL_ASYNC_DELEGATE [as _callAsync]
+    [odin-todo-list]/[tapable]/lib/Hook.js:18:14
+  
+  - Compiler.js:1192 
+    [odin-todo-list]/[webpack]/lib/Compiler.js:1192:33
+  
+  - Compilation.js:2787 finalCallback
+    [odin-todo-list]/[webpack]/lib/Compilation.js:2787:11
+  
+  - Compilation.js:3092 
+    [odin-todo-list]/[webpack]/lib/Compilation.js:3092:11
+  
+  
+</pre>
