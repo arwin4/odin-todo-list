@@ -2,6 +2,10 @@
 import { format } from 'date-fns';
 import { projectManager } from './task';
 
+// NOTE: adding reference functions for DOM elements enhanced some functions
+// readability, but I think it actually turned out overly complicated for such a
+// small project. For any bigger project, you'd probably want to use a framework
+// anyway, making these functions redundant.
 function DOM() {
   // Global DOM element reference
   return {
@@ -12,6 +16,23 @@ function DOM() {
     // Containers
     contentContainer: document.querySelector('.content'),
     projectContainer: document.querySelector('.projects-container'),
+
+    // Controls
+    newProjectForm: document.querySelector('.new-project-form'),
+    newProjectName: document.querySelector('.new-project-input'),
+  };
+}
+
+function projectDOM(projectCard) {
+  // Project card element reference
+  return {
+    projectName: projectCard.querySelector('.project-name'),
+    taskContainer: projectCard.querySelector('.task-container'),
+
+    // Controls
+    deleteBtn: projectCard.querySelector('.delete-project'),
+    newTaskForm: projectCard.querySelector('.new-task-form'),
+    newTaskName: projectCard.querySelector('.new-task-input'),
   };
 }
 
@@ -19,14 +40,22 @@ function taskDOM(taskCard) {
   // Task card element reference
   return {
     nameElem: taskCard.querySelector('.task-name'),
-    descriptionElem: taskCard.querySelector('.duedate'),
-    priorirtyElem: taskCard.querySelector('.priority'),
+    descriptionContainer: taskCard.querySelector('.description-container'),
+    descriptionContent: taskCard.querySelector('.description-content'),
+    priorityElem: taskCard.querySelector('.priority'),
+    dueDateElem: taskCard.querySelector('.duedate'),
+
+    // Controls
+    deleteBtn: taskCard.querySelector('.delete-task'),
+    descriptionBtn: taskCard.querySelector('.edit-description'),
+    changeDateBtn: taskCard.querySelector('.change-duedate'),
   };
 }
 
 // Data change functions
 // Tasks
 const setDueDate = (date, task) => task.setDueDate(date);
+const setDescription = (string, task) => task.setDescription(string);
 // Projects
 const deleteTask = (task, project) => project.deleteTask(task);
 const addTask = (newName, project) => project.addTask(newName.value);
@@ -34,7 +63,7 @@ const deleteProject = (project) => projectManager.deleteProject(project);
 const addProject = (newName) => projectManager.addProject(newName.value);
 
 function renderDate(task, taskCard) {
-  taskDOM(taskCard).descriptionElem.textContent = format(
+  taskDOM(taskCard).dueDateElem.textContent = format(
     task.getDueDate(),
     'PP', // Semi-short date format
   );
@@ -85,15 +114,21 @@ You've got to be more realistic about your goals!`,
 }
 
 function activateTaskControls(task, project, taskCard) {
-  // Activate task delete button
-  const deleteBtn = taskCard.querySelector('.delete-task');
-  deleteBtn.addEventListener('click', () => {
+  // Task delete
+  taskDOM(taskCard).deleteBtn.addEventListener('click', () => {
     deleteTask(task, project);
     taskCard.remove();
   });
 
-  // Activate change due date button
-  const changeDateBtn = taskCard.querySelector('.change-duedate');
+  // Edit description
+  taskDOM(taskCard).descriptionBtn.addEventListener('click', () => {
+    const newDescription = prompt('Enter a new description');
+    setDescription(newDescription, task);
+    taskDOM(taskCard).descriptionContent.textContent = task.getDescription();
+  });
+
+  // Change due date
+  const { changeDateBtn } = taskDOM(taskCard);
   changeDateBtn.addEventListener('click', () => {
     changeDateBtn.hidden = true;
     changeDateBtn.firstElementChild.hidden = true;
@@ -102,8 +137,7 @@ function activateTaskControls(task, project, taskCard) {
 }
 
 function renderTasks(project, projectCard) {
-  const taskContainer = projectCard.querySelector('.task-container');
-
+  const { taskContainer } = projectDOM(projectCard);
   // Clear the task container
   taskContainer.replaceChildren();
 
@@ -115,8 +149,8 @@ function renderTasks(project, projectCard) {
 
     // Render task properties
     taskDOM(taskCard).nameElem.textContent = task.getName();
-    taskDOM(taskCard).descriptionElem.textContent = task.getDescription();
-    taskDOM(taskCard).priorirtyElem.textContent = task.getPriority();
+    taskDOM(taskCard).descriptionContent.textContent = task.getDescription();
+    taskDOM(taskCard).priorityElem.textContent = task.getPriority();
     renderDate(task, taskCard);
 
     activateTaskControls(task, project, taskCard);
@@ -127,16 +161,14 @@ function renderTasks(project, projectCard) {
 
 function activateProjectControls(projectCard, project) {
   // Activate delete project button
-  const deleteBtn = projectCard.querySelector('.delete-project');
-  deleteBtn.addEventListener('click', () => {
+  projectDOM(projectCard).deleteBtn.addEventListener('click', () => {
     deleteProject(project);
     projectCard.remove();
   });
 
   // Activate new task input
-  const newTaskForm = projectCard.querySelector('.new-task-form');
-  const newTaskName = projectCard.querySelector('.new-task-input');
-  newTaskForm.addEventListener('submit', (e) => {
+  const { newTaskName } = projectDOM(projectCard);
+  projectDOM(projectCard).newTaskForm.addEventListener('submit', (e) => {
     e.preventDefault();
     addTask(newTaskName, project);
     renderTasks(project, projectCard);
@@ -151,11 +183,11 @@ function renderProjects() {
   const projects = projectManager.getProjects();
   Object.values(projects).forEach((project) => {
     // Create project card
-    const templateCard = document.querySelector('.project-template');
+    const templateCard = DOM().projectTemplate;
     const projectCard = templateCard.content.firstElementChild.cloneNode(true);
 
     // Render project name
-    projectCard.querySelector('.project-name').textContent = project.getName();
+    projectDOM(projectCard).projectName.textContent = project.getName();
 
     renderTasks(project, projectCard);
 
@@ -166,9 +198,8 @@ function renderProjects() {
 }
 
 function activatePageControls() {
-  const newProjectForm = document.querySelector('.new-project-form');
-  const newProjectName = document.querySelector('.new-project-input');
-  newProjectForm.addEventListener('submit', (e) => {
+  const { newProjectName } = DOM();
+  DOM().newProjectForm.addEventListener('submit', (e) => {
     e.preventDefault();
     addProject(newProjectName);
     renderProjects();
