@@ -1,7 +1,6 @@
 /* eslint-disable no-alert */
 import { format } from 'date-fns';
 import { projectManager } from './task';
-import 'material-icons/iconfont/material-icons.css';
 
 function DOM() {
   // Global DOM element reference
