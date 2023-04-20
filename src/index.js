@@ -11,4 +11,14 @@ project1.addTask('Exterminate all the silverfish');
 project3.addTask('task 4545');
 project3.addTask('task 1001');
 
+if (localStorage.length === 0) {
+  console.log('Nothing stored yet.');
+  // populateStorage();
+  // localStorage.setItem('manager', projectManager);
+}
+
+localStorage.setItem('manager', JSON.stringify(project1.getID()));
+localStorage.setItem('manager2', JSON.stringify(projectManager.getProjects()));
+console.log(localStorage.length);
+
 renderPage();
