@@ -54,6 +54,7 @@ function taskDOM(taskCard) {
 
 // Data change functions
 // Tasks
+const setPriority = (priority, task) => task.setPriority(priority);
 const setDueDate = (date, task) => task.setDueDate(date);
 const setDescription = (string, task) => task.setDescription(string);
 // Projects
@@ -61,6 +62,20 @@ const deleteTask = (task, project) => project.deleteTask(task);
 const addTask = (newName, project) => project.addTask(newName.value);
 const deleteProject = (project) => projectManager.deleteProject(project);
 const addProject = (newName) => projectManager.addProject(newName.value);
+
+function renderPriority(task, taskCard) {
+  const priority = task.getPriority();
+  const { priorityElem } = taskDOM(taskCard);
+
+  const options = priorityElem.children;
+  for (let i = 0; i < options.length; i += 1) {
+    if (options[i].value === priority) {
+      options[i].setAttribute('selected', '');
+    } else {
+      options[i].removeAttribute('selected', '');
+    }
+  }
+}
 
 function renderDate(task, taskCard) {
   taskDOM(taskCard).dueDateElem.textContent = format(
@@ -127,6 +142,13 @@ function activateTaskControls(task, project, taskCard) {
     taskDOM(taskCard).descriptionContent.textContent = task.getDescription();
   });
 
+  // Change priority
+  const { priorityElem } = taskDOM(taskCard);
+  priorityElem.addEventListener('change', () => {
+    const priority = priorityElem.selectedOptions[0].value;
+    setPriority(priority, task);
+  });
+
   // Change due date
   const { changeDateBtn } = taskDOM(taskCard);
   changeDateBtn.addEventListener('click', () => {
@@ -150,7 +172,7 @@ function renderTasks(project, projectCard) {
     // Render task properties
     taskDOM(taskCard).nameElem.textContent = task.getName();
     taskDOM(taskCard).descriptionContent.textContent = task.getDescription();
-    taskDOM(taskCard).priorityElem.textContent = task.getPriority();
+    renderPriority(task, taskCard);
     renderDate(task, taskCard);
 
     activateTaskControls(task, project, taskCard);
