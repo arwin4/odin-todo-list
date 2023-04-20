@@ -1,19 +1,19 @@
 import { v4 as uuid } from 'uuid';
+import { localStorageSave } from './storage';
 
 const taskFactory = function taskFactory(
-  project,
   name = 'Task',
   description = 'Description',
   priority = 'normal',
   dueDate = new Date(), // today
 ) {
-  let projectID = project;
   let taskName = name;
   let taskDescription = description;
   let taskPriority = priority;
   let taskDueDate = dueDate;
   const id = uuid();
 
+  // TODO: implement this in UI
   let done = false;
 
   const toggleStatus = () => {
@@ -21,7 +21,6 @@ const taskFactory = function taskFactory(
   };
 
   // Get task properties
-  const getProject = () => projectID;
   const getName = () => taskName;
   const getDescription = () => taskDescription;
   const getPriority = () => taskPriority;
@@ -29,10 +28,6 @@ const taskFactory = function taskFactory(
   const getID = () => id;
 
   // Set task properties
-  const setProject = (string) => {
-    projectID = string;
-  };
-
   const setName = (string) => {
     taskName = string;
   };
@@ -53,13 +48,11 @@ const taskFactory = function taskFactory(
   };
 
   return {
-    getProject,
     getName,
     getDescription,
     getPriority,
     getDueDate,
     getID,
-    setProject,
     setName,
     setDescription,
     setPriority,
@@ -73,8 +66,8 @@ const projectFactory = function projectFactory(name) {
   let tasks = [];
   const projectID = uuid();
 
-  function addTask(taskName) {
-    const newTask = taskFactory(projectID, taskName);
+  function addTask(taskName, description, priority, dueDate) {
+    const newTask = taskFactory(taskName, description, priority, dueDate);
     tasks.push(newTask);
     return newTask;
   }
@@ -121,7 +114,6 @@ const projectManager = (() => {
   }
 
   const getProjects = () => projects;
-  // delete project
 
   return { addProject, deleteProject, getProjects };
 })();
