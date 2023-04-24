@@ -1,6 +1,6 @@
 /* eslint-disable no-alert */
 import { format } from 'date-fns';
-import { projectManager } from './task';
+import projectManager from './projectManager';
 
 // NOTE: adding reference functions for DOM elements enhanced some functions
 // readability, but I think it actually turned out overly complicated for such a

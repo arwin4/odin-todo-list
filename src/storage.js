@@ -1,4 +1,4 @@
-import { projectManager } from './task';
+import projectManager from './projectManager';
 
 /*
 For every project:
