@@ -13,15 +13,8 @@ For every project:
   put in localstorage
 
   */
-newFunction();
 
-function newFunction() {
-  if (localStorage.length === 0) {
-    console.log('Nothing stored yet.');
-  }
-}
-
-function localStorageSave() {
+function saveToLocalStorage() {
   // Save all projects and their todos in localStorage
   const projects = projectManager.getProjects();
   const projectArray = [];
@@ -49,7 +42,20 @@ function localStorageSave() {
   localStorage.setItem('projects', JSON.stringify(projectArray));
 }
 
-function localStorageLoad() {
+function populateStorage() {
+  const dummyProject = projectManager.addProject('A first little project');
+  dummyProject.addTask('Exterminate all silverfish');
+  dummyProject.addTask('Do a barrel roll');
+
+  saveToLocalStorage();
+}
+
+function loadFromLocalStorage() {
+  if (localStorage.length === 0) {
+    populateStorage();
+    return;
+  }
+
   const parsedProject = JSON.parse(localStorage.projects);
   Object.values(parsedProject).forEach((project) => {
     const currentProject = projectManager.addProject(project.name);
@@ -66,4 +72,4 @@ function localStorageLoad() {
   });
 }
 
-export { localStorageLoad, localStorageSave };
+export { populateStorage, loadFromLocalStorage, saveToLocalStorage };
