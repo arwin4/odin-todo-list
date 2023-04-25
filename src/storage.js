@@ -45,7 +45,7 @@ function saveToLocalStorage() {
 function populateStorage() {
   const dummyProject = projectManager.addProject('A first little project');
   dummyProject.addTask('Exterminate all silverfish');
-  dummyProject.addTask('Do a barrel roll');
+  dummyProject.addTask('Dig a hole');
 
   saveToLocalStorage();
 }
