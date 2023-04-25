@@ -1,4 +1,5 @@
 import projectFactory from './projectFactory';
+import { saveToLocalStorage } from './storage';
 
 const projectManager = (() => {
   let projects = [];
@@ -6,6 +7,7 @@ const projectManager = (() => {
   function addProject(name) {
     const newProject = projectFactory(name);
     projects.push(newProject);
+    saveToLocalStorage();
     return newProject;
   }
 
