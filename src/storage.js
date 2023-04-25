@@ -56,7 +56,7 @@ function loadFromLocalStorage() {
     return;
   }
 
-  const parsedProject = JSON.parse(localStorage.getItem('storage'));
+  const parsedProject = JSON.parse(localStorage.getItem('projects'));
   Object.values(parsedProject).forEach((project) => {
     const currentProject = projectManager.addProject(project.name);
     // TODO: get id back
