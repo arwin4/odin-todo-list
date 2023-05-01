@@ -20,6 +20,9 @@ function DOM() {
     // Controls
     newProjectForm: document.querySelector('.new-project-form'),
     newProjectName: document.querySelector('.new-project-input'),
+
+    // Other
+    projectList: document.querySelector('.project-list'),
   };
 }
 
@@ -181,11 +184,40 @@ function renderTasks(project, projectCard) {
   });
 }
 
-function activateProjectControls(projectCard, project) {
+function renderProjectList() {
+  const listElem = DOM().projectList;
+  listElem.replaceChildren();
+  const projects = projectManager.getProjects();
+  Object.values(projects).forEach((project) => {
+    const projectItem = document.createElement('li');
+    projectItem.textContent = project.getName();
+
+    projectItem.addEventListener('click', () => {
+      renderProject(project);
+    });
+
+    listElem.appendChild(projectItem);
+  });
+}
+
+function renderProject(project) {
+  // Clear the project container
+  DOM().projectContainer.replaceChildren();
+
+  // Create project card
+  const templateCard = DOM().projectTemplate;
+  const projectCard = templateCard.content.firstElementChild.cloneNode(true);
+
+  // Render project name
+  projectDOM(projectCard).projectName.textContent = project.getName();
+
+  renderTasks(project, projectCard);
+
   // Activate delete project button
   projectDOM(projectCard).deleteBtn.addEventListener('click', () => {
     deleteProject(project);
     projectCard.remove();
+    renderProjectList();
   });
 
   // Activate new task input
@@ -196,42 +228,24 @@ function activateProjectControls(projectCard, project) {
     renderTasks(project, projectCard);
     newTaskName.value = '';
   });
-}
 
-function renderProjects() {
-  // Clear the project container
-  DOM().projectContainer.replaceChildren();
-
-  const projects = projectManager.getProjects();
-  Object.values(projects).forEach((project) => {
-    // Create project card
-    const templateCard = DOM().projectTemplate;
-    const projectCard = templateCard.content.firstElementChild.cloneNode(true);
-
-    // Render project name
-    projectDOM(projectCard).projectName.textContent = project.getName();
-
-    renderTasks(project, projectCard);
-
-    activateProjectControls(projectCard, project);
-
-    DOM().projectContainer.appendChild(projectCard);
-  });
+  DOM().projectContainer.appendChild(projectCard);
 }
 
 function activatePageControls() {
   const { newProjectName } = DOM();
   DOM().newProjectForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    addProject(newProjectName);
-    renderProjects();
+    const newProject = addProject(newProjectName);
+    renderProject(newProject);
+    renderProjectList();
     newProjectName.value = '';
   });
 }
 
 function renderPage() {
   activatePageControls();
-  renderProjects();
+  renderProjectList();
 }
 
 export default renderPage;

@@ -19,6 +19,23 @@ a {
   color: inherit;
 }
 
+ul {
+  list-style: none;
+}
+
+li {
+  cursor: pointer;
+}
+
+.sidebar {
+  /* padding-left: 20px; */
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+}
+
 button {
   display: flex;
   align-items: center;
