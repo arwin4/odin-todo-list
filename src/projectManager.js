@@ -65,7 +65,6 @@ const projectManager = (() => {
   function addProject(name) {
     const newProject = projectFactory(name);
     projects.push(newProject);
-    saveToLocalStorage();
     return newProject;
   }
 
@@ -73,10 +72,15 @@ const projectManager = (() => {
     // Mutates the array!
     const id = projectToDelete.getID();
     projects = projects.filter((project) => project.getID() !== id);
-    saveToLocalStorage();
   }
 
   const getProjects = () => projects;
+
+  function saveProjectsRegularly() {
+    setInterval(saveToLocalStorage, 500);
+  }
+
+  saveProjectsRegularly();
 
   return {
     addProject,
