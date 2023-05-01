@@ -185,8 +185,10 @@ function renderTasks(project, projectCard) {
 }
 
 function renderProjectList() {
+  // Clear the list
   const listElem = DOM().projectList;
   listElem.replaceChildren();
+
   const projects = projectManager.getProjects();
   Object.values(projects).forEach((project) => {
     const projectItem = document.createElement('li');
