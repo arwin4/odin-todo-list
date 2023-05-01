@@ -73,6 +73,7 @@ const projectManager = (() => {
     // Mutates the array!
     const id = projectToDelete.getID();
     projects = projects.filter((project) => project.getID() !== id);
+    saveToLocalStorage();
   }
 
   const getProjects = () => projects;
