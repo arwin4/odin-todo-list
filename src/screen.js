@@ -16,6 +16,7 @@ function DOM() {
     // Containers
     contentContainer: document.querySelector('.content'),
     projectContainer: document.querySelector('.projects-container'),
+    taskContainer: document.querySelector('.task-container'),
 
     // Controls
     newProjectForm: document.querySelector('.new-project-form'),
@@ -161,8 +162,8 @@ function activateTaskControls(task, project, taskCard) {
   });
 }
 
-function renderTasks(project, projectCard) {
-  const { taskContainer } = projectDOM(projectCard);
+function renderTasks(project) {
+  const { taskContainer } = DOM();
   // Clear the task container
   taskContainer.replaceChildren();
 
@@ -226,6 +227,7 @@ function renderProject(project) {
   const { newTaskName } = projectDOM(projectCard);
   projectDOM(projectCard).newTaskForm.addEventListener('submit', (e) => {
     e.preventDefault();
+    if (newTaskName.value.length < 1) return;
     addTask(newTaskName, project);
     renderTasks(project, projectCard);
     newTaskName.value = '';
@@ -238,6 +240,7 @@ function activatePageControls() {
   const { newProjectName } = DOM();
   DOM().newProjectForm.addEventListener('submit', (e) => {
     e.preventDefault();
+    if (newProjectName.value.length < 1) return;
     const newProject = addProject(newProjectName);
     renderProject(newProject);
     renderProjectList();

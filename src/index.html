@@ -5,17 +5,23 @@
     <title>Todo list</title>
   </head>
   <body>
+    <div class="sidebar">
+      <form class="new-project-form">
+        <input
+          type="text"
+          class="new-project-input"
+          placeholder="Add a new project..."
+        />
+      </form>
+      <h4>Your projects</h4>
+      <ul class="project-list"></ul>
+    </div>
     <div class="content">
-      <div class="sidebar">
-        <form class="new-project-form">
-          <input type="text" class="new-project-input" />
-        </form>
-        <h4>Your projects</h4>
-        <ul class="project-list"></ul>
-      </div>
       <div class="projects-container">
-        Select a project from the list to show its tasks
+        <span class="material-icons">chevron_left</span> Select a project from
+        the list to show its tasks
       </div>
+      <div class="task-container"></div>
     </div>
   </body>
 
@@ -32,7 +38,7 @@
           <input type="text" class="new-task-input" />
         </form>
       </div>
-      <div class="task-container"></div>
+      <!-- <div class="task-container"></div> -->
     </div>
   </template>
 
