@@ -80,6 +80,11 @@ const projectManager = (() => {
     foundProject.setName(newName);
   }
 
+  function resetProjects() {
+    projects = [];
+    populateStorage();
+  }
+
   const getProjects = () => projects;
 
   function saveProjectsRegularly() {
@@ -92,6 +97,7 @@ const projectManager = (() => {
     addProject,
     deleteProject,
     renameProject,
+    resetProjects,
     getProjects,
     loadFromLocalStorage,
   };

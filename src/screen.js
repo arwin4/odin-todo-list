@@ -14,13 +14,13 @@ function DOM() {
     projectTemplate: document.querySelector('.project-template'),
 
     // Containers
-    contentContainer: document.querySelector('.content'),
-    project: document.querySelector('.project'),
+    projectContainer: document.querySelector('.project'),
     taskContainer: document.querySelector('.task-container'),
 
     // Controls
     newProjectForm: document.querySelector('.new-project-form'),
     newProjectName: document.querySelector('.new-project-input'),
+    resetProjectsBtn: document.querySelector('.reset-projects'),
 
     // Other
     projectList: document.querySelector('.project-list'),
@@ -219,7 +219,7 @@ function renderProjectList() {
 
 function renderProject(project) {
   // Clear the project container
-  DOM().project.replaceChildren();
+  DOM().projectContainer.replaceChildren();
 
   // Create project card
   const templateCard = DOM().projectTemplate;
@@ -256,7 +256,7 @@ function renderProject(project) {
     newTaskName.value = '';
   });
 
-  DOM().project.appendChild(projectCard);
+  DOM().projectContainer.appendChild(projectCard);
 }
 
 function activatePageControls() {
@@ -268,6 +268,17 @@ function activatePageControls() {
     renderProject(newProject);
     renderProjectList();
     newProjectName.value = '';
+  });
+
+  const { resetProjectsBtn } = DOM();
+  resetProjectsBtn.addEventListener('click', () => {
+    projectManager.resetProjects();
+    renderProjectList();
+
+    const { projectContainer: project } = DOM();
+    project.replaceChildren();
+    const { taskContainer } = DOM();
+    taskContainer.replaceChildren();
   });
 }
 

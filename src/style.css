@@ -72,6 +72,11 @@ li:active {
     'project-list';
 }
 
+.reset-projects {
+  margin-top: 20%;
+  width: fit-content;
+}
+
 button {
   display: flex;
   align-items: center;
