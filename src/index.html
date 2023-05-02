@@ -13,13 +13,14 @@
           placeholder="Add a new project..."
         />
       </form>
-      <h4>Your projects</h4>
+      <h4 class="project-list-title">Your projects</h4>
       <ul class="project-list"></ul>
     </div>
-    <div class="content">
-      <div class="projects-container">
-        <span class="material-icons">chevron_left</span> Select a project from
-        the list to show its tasks
+    <div class="main-content">
+      <div class="project">
+        <div style="position: relative; top: 66px">
+          ← Select a project from the list to show its tasks
+        </div>
       </div>
       <div class="task-container"></div>
     </div>
@@ -27,7 +28,7 @@
 
   <!-- Templates -->
   <template class="project-template">
-    <div class="project card">
+    <div class="project-card">
       <h1 class="project-name">Project title</h1>
       <div class="project-controls">
         <button class="delete-project">
@@ -38,7 +39,6 @@
           <input type="text" class="new-task-input" />
         </form>
       </div>
-      <!-- <div class="task-container"></div> -->
     </div>
   </template>
 

@@ -15,7 +15,7 @@ function DOM() {
 
     // Containers
     contentContainer: document.querySelector('.content'),
-    projectContainer: document.querySelector('.projects-container'),
+    project: document.querySelector('.project'),
     taskContainer: document.querySelector('.task-container'),
 
     // Controls
@@ -31,7 +31,6 @@ function projectDOM(projectCard) {
   // Project card element reference
   return {
     projectName: projectCard.querySelector('.project-name'),
-    taskContainer: projectCard.querySelector('.task-container'),
 
     // Controls
     deleteBtn: projectCard.querySelector('.delete-project'),
@@ -205,7 +204,7 @@ function renderProjectList() {
 
 function renderProject(project) {
   // Clear the project container
-  DOM().projectContainer.replaceChildren();
+  DOM().project.replaceChildren();
 
   // Create project card
   const templateCard = DOM().projectTemplate;
@@ -233,7 +232,7 @@ function renderProject(project) {
     newTaskName.value = '';
   });
 
-  DOM().projectContainer.appendChild(projectCard);
+  DOM().project.appendChild(projectCard);
 }
 
 function activatePageControls() {

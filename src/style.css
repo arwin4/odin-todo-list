@@ -9,13 +9,16 @@
 
 body {
   display: grid;
-  align-items: start;
-  justify-content: center;
-  grid-template-columns: 200px 1fr;
+  grid-template-areas: 'sidebar content';
 
-  height: 100vh;
+  grid-template-columns: 200px 1fr;
+  align-items: start;
+
+  height: 100%;
   margin: 0 5vw;
   margin-top: 20vh;
+
+  column-gap: 25px;
 
   background-color: #dce8f5;
 
@@ -38,12 +41,37 @@ li {
   cursor: pointer;
 }
 
+li:hover {
+  color: rgb(78, 78, 78);
+}
+
+li:active {
+  color: rgb(104, 116, 129);
+}
+
+.new-project-form {
+  grid-area: new-project-form;
+  margin-bottom: 20px;
+}
+
+.project-list-title {
+  grid-area: project-list-title;
+}
+
+.project-list {
+  grid-area: project-list;
+}
+
 .sidebar {
   display: grid;
-  gap: 20px;
+  grid-template-areas:
+    'project-list-title'
+    'new-project-form'
+    'project-list';
 }
 
 .content {
+  grid-area: content;
   display: grid;
   grid-template-columns: 1fr 2fr;
 }
@@ -60,10 +88,19 @@ button {
   display: none;
 }
 
-.projects-container {
-  display: flex;
-  flex-direction: row;
+.main-content {
+  display: grid;
+  grid-template-areas: 'project-card task-container';
+  grid-template-columns: 200px 1fr;
   column-gap: 20px;
+}
+
+.project-card {
+  grid-area: project-card;
+}
+
+.task-container {
+  grid-area: task-container;
 }
 
 /* Projects start */
