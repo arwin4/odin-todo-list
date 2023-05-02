@@ -74,6 +74,12 @@ const projectManager = (() => {
     projects = projects.filter((project) => project.getID() !== id);
   }
 
+  function renameProject(newName, projectToRename) {
+    const id = projectToRename.getID();
+    const foundProject = projects.find((project) => project.getID() === id);
+    foundProject.setName(newName);
+  }
+
   const getProjects = () => projects;
 
   function saveProjectsRegularly() {
@@ -85,6 +91,7 @@ const projectManager = (() => {
   return {
     addProject,
     deleteProject,
+    renameProject,
     getProjects,
     loadFromLocalStorage,
   };

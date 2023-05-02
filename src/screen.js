@@ -34,6 +34,7 @@ function projectDOM(projectCard) {
 
     // Controls
     deleteBtn: projectCard.querySelector('.delete-project'),
+    renameBtn: projectCard.querySelector('.rename-project'),
     newTaskForm: projectCard.querySelector('.new-task-form'),
     newTaskName: projectCard.querySelector('.new-task-input'),
   };
@@ -65,6 +66,9 @@ const deleteTask = (task, project) => project.deleteTask(task);
 const addTask = (newName, project) => project.addTask(newName.value);
 const deleteProject = (project) => projectManager.deleteProject(project);
 const addProject = (newName) => projectManager.addProject(newName.value);
+const renameProject = (newName, project) => {
+  projectManager.renameProject(newName, project);
+};
 
 function renderPriority(task, taskCard) {
   const priority = task.getPriority();
@@ -220,6 +224,14 @@ function renderProject(project) {
     deleteProject(project);
     projectCard.remove();
     renderProjectList();
+  });
+
+  // Activate rename project button
+  projectDOM(projectCard).renameBtn.addEventListener('click', () => {
+    const newName = prompt('Enter a new name for this project');
+    renameProject(newName, project);
+    renderProjectList();
+    renderProject(project);
   });
 
   // Activate new task input
