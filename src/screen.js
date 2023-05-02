@@ -73,7 +73,7 @@ const renameProject = (newName, project) => {
   projectManager.renameProject(newName, project);
 };
 
-function clearMainContent() {
+function restageMainContent() {
   const { mainContent } = DOM();
   if (mainContent !== null) mainContent.replaceChildren();
 
@@ -232,7 +232,7 @@ function renderProjectList() {
 }
 
 function renderProject(project) {
-  clearMainContent();
+  restageMainContent();
 
   // Create project card
   const templateCard = DOM().projectTemplate;
@@ -246,7 +246,7 @@ function renderProject(project) {
   // Activate delete project button
   projectDOM(projectCard).deleteBtn.addEventListener('click', () => {
     deleteProject(project);
-    clearMainContent();
+    restageMainContent();
     renderProjectList();
   });
 
@@ -270,6 +270,7 @@ function renderProject(project) {
   });
 
   DOM().projectContainer.appendChild(projectCard);
+  newTaskName.focus();
 }
 
 function activatePageControls() {
@@ -286,7 +287,7 @@ function activatePageControls() {
   const { resetProjectsBtn } = DOM();
   resetProjectsBtn.addEventListener('click', () => {
     projectManager.resetProjects();
-    clearMainContent();
+    restageMainContent();
     renderProjectList();
   });
 }
