@@ -51,6 +51,7 @@ function taskDOM(taskCard) {
 
     // Controls
     deleteBtn: taskCard.querySelector('.delete-task'),
+    renameBtn: taskCard.querySelector('.rename-task'),
     descriptionBtn: taskCard.querySelector('.edit-description'),
     changeDateBtn: taskCard.querySelector('.change-duedate'),
   };
@@ -58,9 +59,10 @@ function taskDOM(taskCard) {
 
 // Data change functions
 // Tasks
+const renameTask = (newName, task) => task.setName(newName);
+const setDescription = (string, task) => task.setDescription(string);
 const setPriority = (priority, task) => task.setPriority(priority);
 const setDueDate = (date, task) => task.setDueDate(date);
-const setDescription = (string, task) => task.setDescription(string);
 // Projects
 const deleteTask = (task, project) => project.deleteTask(task);
 const addTask = (newName, project) => project.addTask(newName.value);
@@ -140,6 +142,14 @@ function activateTaskControls(task, project, taskCard) {
   taskDOM(taskCard).deleteBtn.addEventListener('click', () => {
     deleteTask(task, project);
     taskCard.remove();
+  });
+
+  // Rename task
+  taskDOM(taskCard).renameBtn.addEventListener('click', () => {
+    const newName = prompt('Enter a new name for this task');
+    if (newName === null || newName.length < 1) return;
+    renameTask(newName, task);
+    taskDOM(taskCard).nameElem.textContent = newName;
   });
 
   // Edit description
