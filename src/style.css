@@ -20,6 +20,8 @@ body {
 
   column-gap: 25px;
 
+  overflow-wrap: anywhere;
+
   background-color: #dce8f5;
 
   font-family: 'Noto Sans', system-ui, -apple-system, BlinkMacSystemFont,
@@ -68,12 +70,6 @@ li:active {
     'project-list-title'
     'new-project-form'
     'project-list';
-}
-
-.content {
-  grid-area: content;
-  display: grid;
-  grid-template-columns: 1fr 2fr;
 }
 
 button {
