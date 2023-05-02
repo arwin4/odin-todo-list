@@ -51,17 +51,20 @@
           <h2 class="task-name">Task Name</h2>
         </summary>
         <div class="task-content">
-          <button class="delete-task">
-            <span class="material-icons">delete_forever</span>
-            Delete task
-          </button>
+          <div class="task-controls">
+            <button class="delete-task">
+              <span class="material-icons">delete_forever</span>
+            </button>
+          </div>
           <div class="description-container">
             <button class="edit-description">
               <span class="material-icons">edit</span>
+              Edit description
             </button>
             <p class="description-content"></p>
           </div>
 
+          <p class="priority-label">Priority:</p>
           <select class="priority" name="priority">
             <option value="high">High</option>
             <option value="normal">Normal</option>

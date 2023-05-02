@@ -2,7 +2,7 @@ import { v4 as uuid } from 'uuid';
 
 const taskFactory = function taskFactory(
   name = 'Task',
-  description = 'Description',
+  description = 'A descriptive description',
   priority = 'normal',
   dueDate = new Date(), // today
 ) {

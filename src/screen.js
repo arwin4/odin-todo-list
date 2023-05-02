@@ -145,6 +145,7 @@ function activateTaskControls(task, project, taskCard) {
   // Edit description
   taskDOM(taskCard).descriptionBtn.addEventListener('click', () => {
     const newDescription = prompt('Enter a new description');
+    if (newDescription === null || newDescription.length < 1) return;
     setDescription(newDescription, task);
     taskDOM(taskCard).descriptionContent.textContent = task.getDescription();
   });
