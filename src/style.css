@@ -123,6 +123,10 @@ button {
   border-left: 3px solid #ff6550;
 }
 
+.priority {
+  width: max-content;
+}
+
 .date {
   display: flex;
   align-items: center;
