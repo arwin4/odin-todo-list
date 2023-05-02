@@ -229,7 +229,7 @@ function renderProject(project) {
   // Activate rename project button
   projectDOM(projectCard).renameBtn.addEventListener('click', () => {
     const newName = prompt('Enter a new name for this project');
-    if (newName === null) return;
+    if (newName === null || newName.length < 1) return;
     renameProject(newName, project);
     renderProjectList();
     renderProject(project);
