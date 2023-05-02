@@ -96,6 +96,10 @@ button {
   column-gap: 20px;
 }
 
+.main-content > button {
+  border-width: 3px;
+}
+
 .project-card {
   grid-area: project-card;
 }
@@ -146,6 +150,7 @@ summary > * {
 .task.card {
   --card-padding: 10px 15px;
 }
+
 summary {
   padding: var(--card-padding);
   cursor: pointer;

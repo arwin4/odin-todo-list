@@ -14,7 +14,8 @@ function DOM() {
     projectTemplate: document.querySelector('.project-template'),
 
     // Containers
-    projectContainer: document.querySelector('.project'),
+    mainContent: document.querySelector('.main-content'),
+    projectContainer: document.querySelector('.project-container'),
     taskContainer: document.querySelector('.task-container'),
 
     // Controls
@@ -71,6 +72,19 @@ const addProject = (newName) => projectManager.addProject(newName.value);
 const renameProject = (newName, project) => {
   projectManager.renameProject(newName, project);
 };
+
+function clearMainContent() {
+  const { mainContent } = DOM();
+  if (mainContent !== null) mainContent.replaceChildren();
+
+  // Rebuild child elements
+  const projectContainer = document.createElement('div');
+  projectContainer.classList.add('project-container');
+  mainContent.appendChild(projectContainer);
+  const taskContainer = document.createElement('div');
+  taskContainer.classList.add('task-container');
+  mainContent.appendChild(taskContainer);
+}
 
 function renderPriority(task, taskCard) {
   const priority = task.getPriority();
@@ -179,7 +193,7 @@ function activateTaskControls(task, project, taskCard) {
 function renderTasks(project) {
   const { taskContainer } = DOM();
   // Clear the task container
-  taskContainer.replaceChildren();
+  if (taskContainer !== null) taskContainer.replaceChildren();
 
   const tasks = project.getTasks();
   Object.values(tasks).forEach((task) => {
@@ -218,8 +232,7 @@ function renderProjectList() {
 }
 
 function renderProject(project) {
-  // Clear the project container
-  DOM().projectContainer.replaceChildren();
+  clearMainContent();
 
   // Create project card
   const templateCard = DOM().projectTemplate;
@@ -233,7 +246,7 @@ function renderProject(project) {
   // Activate delete project button
   projectDOM(projectCard).deleteBtn.addEventListener('click', () => {
     deleteProject(project);
-    projectCard.remove();
+    clearMainContent();
     renderProjectList();
   });
 
@@ -273,12 +286,8 @@ function activatePageControls() {
   const { resetProjectsBtn } = DOM();
   resetProjectsBtn.addEventListener('click', () => {
     projectManager.resetProjects();
+    clearMainContent();
     renderProjectList();
-
-    const { projectContainer: project } = DOM();
-    project.replaceChildren();
-    const { taskContainer } = DOM();
-    taskContainer.replaceChildren();
   });
 }
 
