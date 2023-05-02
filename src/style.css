@@ -99,6 +99,12 @@ button {
   grid-area: project-card;
 }
 
+.project-controls {
+  display: grid;
+  justify-items: start;
+  grid-template-columns: 50px 50px;
+}
+
 .task-container {
   grid-area: task-container;
 }
