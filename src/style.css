@@ -70,7 +70,7 @@ button:active {
   background-color: var(--pistachio);
 }
 
-/* Sidebar start */
+/*=== Sidebar start ===*/
 
 ul {
   list-style: none;
@@ -157,9 +157,9 @@ li:active {
   font-weight: 650;
 }
 
-/* Sidebar end */
+/*=== Sidebar end ===*/
 
-/* Main content start */
+/*=== Main content start ===*/
 
 .main-content button {
   font-size: 0.8rem;
@@ -175,7 +175,7 @@ li:active {
   column-gap: 60px;
 }
 
-/* Project card start */
+/*=== Project card start ===*/
 
 .project-card {
   grid-area: project-card;
@@ -202,9 +202,9 @@ li:active {
   row-gap: 10px;
 }
 
-/* Project card end */
+/*=== Project card end ===*/
 
-/* Task card start */
+/*=== Task card start ===*/
 
 .task-container {
   grid-area: task-container;
@@ -244,7 +244,7 @@ summary {
   --card-padding: 10px 15px;
 }
 
-/* Task content start */
+/*=== Task content start ===*/
 
 .task-content {
   padding: var(--card-padding);
@@ -278,5 +278,5 @@ summary {
   gap: 10px;
 }
 
-/* Task content end */
-/* Task card end */
+/*=== Task content end ===*/
+/*=== Task card end ===*/
