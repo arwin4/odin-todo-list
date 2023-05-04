@@ -99,7 +99,8 @@ li:active {
 
 .project-list {
   grid-area: project-list;
-  overflow: scroll;
+  overflow: auto;
+  scrollbar-gutter: stable;
 
   text-decoration: underline;
 }
