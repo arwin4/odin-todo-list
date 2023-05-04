@@ -3,6 +3,12 @@
   <head>
     <meta charset="utf-8" />
     <title>Todo list</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow&family=Montserrat:wght@300;400&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div class="sidebar">
@@ -20,7 +26,7 @@
     </div>
     <div class="main-content">
       <div class="project-container">
-        <div style="position: relative; top: 66px">
+        <div style="position: relative; top: 60px; text-align: end">
           ← Select a project from the list to show its tasks
         </div>
       </div>
@@ -31,7 +37,7 @@
   <!-- Templates -->
   <template class="project-template">
     <div class="project-card">
-      <h1 class="project-name">Project title</h1>
+      <h2 class="project-name">Project title</h2>
       <div class="project-controls">
         <button class="delete-project">
           <span class="material-icons">delete_forever</span>
@@ -54,7 +60,7 @@
     <div class="task card">
       <details>
         <summary>
-          <h2 class="task-name">Task Name</h2>
+          <h3 class="task-name">Task Name</h3>
         </summary>
         <div class="task-content">
           <div class="task-controls">

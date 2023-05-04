@@ -1,3 +1,12 @@
+:root {
+  --cream: hsla(66, 61%, 84%, 1);
+  --tea-green: hsla(88, 50%, 78%, 1);
+  --pistachio: hsla(94, 38%, 59%, 1);
+  --carrot-orange: hsla(35, 87%, 49%, 1);
+  --carrot-orange-dark: rgb(180, 111, 14);
+  --drab-dark-brown: hsla(60, 28%, 17%, 1);
+}
+
 ::selection {
   color: black;
   background: #ff6550;
@@ -22,11 +31,9 @@ body {
 
   overflow-wrap: anywhere;
 
-  background-color: #dce8f5;
+  background-color: var(--cream);
 
-  font-family: 'Noto Sans', system-ui, -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: Barlow, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 a {
@@ -62,6 +69,7 @@ li:active {
 
 .project-list {
   grid-area: project-list;
+  text-decoration: underline;
 }
 
 .sidebar {
@@ -70,17 +78,40 @@ li:active {
     'project-list-title'
     'new-project-form'
     'project-list';
+  border-right: var(--carrot-orange) solid 5px;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  height: 55vh;
+  align-content: start;
 }
 
 .reset-projects {
   margin-top: 20%;
   width: fit-content;
+
+  font-weight: 500;
+  font-style: normal;
+  letter-spacing: 0.1rem;
+  line-height: 1.7;
+  padding: 0px 10px;
 }
 
 button {
   display: flex;
   align-items: center;
   cursor: pointer;
+
+  font-family: Tahoma, Geneva, Verdana, sans-serif;
+
+  color: var(--drab-dark-brown);
+  background-color: var(--pistachio);
+
+  border: var(--carrot-orange-dark) solid 2px;
+  border-radius: 5px;
+}
+
+.main-content button {
+  font-size: 0.8rem;
 }
 
 *[hidden] {
@@ -93,11 +124,9 @@ button {
   display: grid;
   grid-template-areas: 'project-card task-container';
   grid-template-columns: 200px 1fr;
-  column-gap: 20px;
-}
 
-.main-content > button {
-  border-width: 3px;
+  margin-left: 20px;
+  column-gap: 60px;
 }
 
 .project-card {
@@ -114,8 +143,7 @@ button {
 .task-container {
   grid-area: task-container;
   display: grid;
-  grid-template-rows: max-content;
-  grid-template-columns: auto;
+  grid-template-columns: min(100%, 500px);
 
   row-gap: 10px;
 }
@@ -123,13 +151,11 @@ button {
 .task-container .card {
   display: grid;
   align-items: center;
-
   font-size: 0.9rem;
-  color: #ffffff;
-
-  background: linear-gradient(rgb(117, 128, 141) 0%, rgb(104, 116, 129) 100%);
-  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.75);
-  border-left: 3px solid #ff6550;
+  background: var(--tea-green);
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+  border: var(--carrot-orange) solid 2px;
+  border-radius: 10px;
 }
 
 .priority {
@@ -149,6 +175,7 @@ summary > * {
 
 .task.card {
   --card-padding: 10px 15px;
+  font-family: Montserrat, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 summary {
