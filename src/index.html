@@ -3,30 +3,29 @@
   <head>
     <meta charset="utf-8" />
     <title>Todo list</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Barlow&family=Montserrat:wght@300;400&display=swap"
-      rel="stylesheet"
-    />
+
+    <link rel="preconnect" href="https://rsms.me/" />
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
   </head>
   <body>
     <div class="sidebar">
+      <p class="project-list-title">
+        Your projects <span class="list-arrow">↴</span>
+      </p>
+      <ul class="project-list"></ul>
       <form class="new-project-form">
         <input
           type="text"
           class="new-project-input"
-          placeholder="Add a new project..."
+          placeholder="Add a new project"
           autofocus
         />
       </form>
-      <h4 class="project-list-title">Your projects</h4>
-      <ul class="project-list"></ul>
       <button class="reset-projects">Reset all projects</button>
     </div>
     <div class="main-content">
       <div class="project-container">
-        <div style="position: relative; top: 60px; text-align: end">
+        <div style="position: relative; top: 50px; text-align: end">
           ← Select a project from the list to show its tasks
         </div>
       </div>
@@ -49,7 +48,7 @@
           <input
             type="text"
             class="new-task-input"
-            placeholder="Add a new task..."
+            placeholder="Add a new task"
           />
         </form>
       </div>

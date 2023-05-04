@@ -36,6 +36,11 @@ const projectManager = (() => {
     dummyProject.addTask('Exterminate all silverfish');
     dummyProject.addTask('Dig a hole');
 
+    const dummyProject2 = projectManager.addProject(
+      'This project has a bit of a looooooooooong name',
+    );
+    dummyProject2.addTask('Take a day off');
+
     saveToLocalStorage();
   }
 
