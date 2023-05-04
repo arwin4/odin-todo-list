@@ -1,9 +1,10 @@
 :root {
-  --cream: hsla(66, 61%, 84%, 1);
-  --tea-green: hsla(88, 50%, 78%, 1);
-  --pistachio: hsla(94, 38%, 59%, 1);
-  --carrot-orange: hsla(35, 87%, 49%, 1);
-  --drab-dark-brown: hsla(60, 28%, 17%, 1);
+  --cream: hsla(66, 61%, 84%);
+  --tea-green: hsla(88, 50%, 78%);
+  --pistachio: hsla(94, 38%, 59%);
+  --carrot-orange: hsla(35, 87%, 49%);
+  --drab-dark-brown: hsla(60, 28%, 17%);
+  /* Made at coolors.co */
 
   font-family: 'Inter', sans-serif;
   @supports (font-variation-settings: normal) {
@@ -15,7 +16,7 @@
 
 ::selection {
   color: black;
-  background: #ff6550;
+  background: hsl(7, 100%, 66%);
 }
 
 * {
@@ -64,11 +65,11 @@ li {
 }
 
 li:hover {
-  color: rgb(78, 78, 78);
+  color: hsl(0, 0%, 31%);
 }
 
 li:active {
-  color: rgb(104, 116, 129);
+  color: hsl(211, 11%, 46%);
 }
 
 .new-project-form {
@@ -99,6 +100,7 @@ li:active {
 
 .project-list {
   grid-area: project-list;
+
   overflow: auto;
   scrollbar-gutter: stable;
 
@@ -142,11 +144,11 @@ button {
   border: var(--carrot-orange) solid 2px;
   border-radius: 10px;
 
-  box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.3);
+  box-shadow: 1px 1px 5px 0px hsla(0, 0%, 0%, 0.3);
 }
 
 button:hover {
-  background-color: #badb94;
+  background-color: hsl(88, 50%, 72%);
 }
 
 button:active {
@@ -211,7 +213,7 @@ button:active {
   align-items: center;
   font-size: 0.9rem;
   background: var(--tea-green);
-  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 5px 0px hsla(0, 0%, 0%, 0.75);
   border: var(--carrot-orange) solid 2px;
   border-radius: 10px;
 }
