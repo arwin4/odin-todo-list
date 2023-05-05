@@ -51,6 +51,8 @@ function taskDOM(taskCard) {
     dueDateElem: taskCard.querySelector('.duedate'),
 
     // Controls
+    markDoneBtn: taskCard.querySelector('.mark-done'),
+    doneText: taskCard.querySelector('.done-text'),
     deleteBtn: taskCard.querySelector('.delete-task'),
     renameBtn: taskCard.querySelector('.rename-task'),
     descriptionBtn: taskCard.querySelector('.edit-description'),
@@ -60,6 +62,7 @@ function taskDOM(taskCard) {
 
 // Data change functions
 // Tasks
+const toggleDoneStatus = (task) => task.toggleStatus(task.getStatus());
 const renameTask = (newName, task) => task.setName(newName);
 const setDescription = (string, task) => task.setDescription(string);
 const setPriority = (priority, task) => task.setPriority(priority);
@@ -152,6 +155,22 @@ You've got to be more realistic about your goals!`,
 }
 
 function activateTaskControls(task, project, taskCard) {
+  // Mark task done
+  const doneBtn = taskDOM(taskCard).markDoneBtn;
+  const { doneText } = taskDOM(taskCard);
+  doneBtn.addEventListener('click', () => {
+    if (task.getStatus() === false) {
+      // Close task card and make transparent
+      doneText.textContent = 'Mark undone';
+      taskCard.firstElementChild.removeAttribute('open');
+      taskCard.classList.add('marked-done');
+    } else {
+      taskCard.classList.remove('marked-done');
+      doneText.textContent = 'Mark done';
+    }
+    toggleDoneStatus(task);
+  });
+
   // Task delete
   taskDOM(taskCard).deleteBtn.addEventListener('click', () => {
     deleteTask(task, project);
@@ -202,6 +221,10 @@ function renderTasks(project) {
     const taskCard = taskTemplate.content.firstElementChild.cloneNode(true);
 
     // Render task properties
+    if (task.getStatus()) {
+      taskDOM(taskCard).doneText.textContent = 'Mark undone';
+      taskCard.classList.add('marked-done');
+    }
     taskDOM(taskCard).nameElem.textContent = task.getName();
     taskDOM(taskCard).descriptionContent.textContent = task.getDescription();
     renderPriority(task, taskCard);
@@ -224,6 +247,7 @@ function renderProjectList() {
     projectItem.textContent = project.getName();
 
     projectItem.addEventListener('click', () => {
+      // eslint-disable-next-line no-use-before-define
       renderProject(project);
     });
 

@@ -5,6 +5,7 @@ const taskFactory = function taskFactory(
   description = 'A descriptive description',
   priority = 'normal',
   dueDate = new Date(), // today
+  status = false,
 ) {
   let taskName = name;
   let taskDescription = description;
@@ -12,11 +13,9 @@ const taskFactory = function taskFactory(
   let taskDueDate = dueDate;
   const id = uuid();
 
-  // TODO: implement this in UI
-  let done = false;
-
   const toggleStatus = () => {
-    done = !done;
+    // eslint-disable-next-line no-param-reassign
+    status = !status;
   };
 
   // Get task properties
@@ -25,6 +24,7 @@ const taskFactory = function taskFactory(
   const getPriority = () => taskPriority;
   const getDueDate = () => taskDueDate;
   const getID = () => id;
+  const getStatus = () => status;
 
   // Set task properties
   const setName = (string) => {
@@ -52,6 +52,7 @@ const taskFactory = function taskFactory(
     getPriority,
     getDueDate,
     getID,
+    getStatus,
     setName,
     setDescription,
     setPriority,

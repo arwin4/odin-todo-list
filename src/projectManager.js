@@ -18,6 +18,7 @@ const projectManager = (() => {
         exposedTask.description = task.getDescription();
         exposedTask.priority = task.getPriority();
         exposedTask.dueDate = task.getDueDate();
+        exposedTask.status = task.getStatus();
         // TODO: other properties
         taskArray.push(exposedTask);
       });
@@ -60,6 +61,7 @@ const projectManager = (() => {
           task.description,
           task.priority,
           new Date(task.dueDate),
+          task.status,
           // TODO: more properties. (id and more)
         );
       });

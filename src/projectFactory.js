@@ -6,8 +6,14 @@ const projectFactory = function projectFactory(name) {
   let tasks = [];
   const projectID = uuid();
 
-  function addTask(taskName, description, priority, dueDate) {
-    const newTask = taskFactory(taskName, description, priority, dueDate);
+  function addTask(taskName, description, priority, dueDate, status) {
+    const newTask = taskFactory(
+      taskName,
+      description,
+      priority,
+      dueDate,
+      status,
+    );
     tasks.push(newTask);
     return newTask;
   }

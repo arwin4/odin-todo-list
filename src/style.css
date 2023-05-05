@@ -254,6 +254,10 @@ summary {
   --card-padding: 10px 15px;
 }
 
+.marked-done {
+  opacity: 50%;
+}
+
 /*=== Task content start ===*/
 
 .task-content {
