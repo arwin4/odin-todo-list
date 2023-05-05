@@ -36,7 +36,7 @@ body {
   margin: 0 5vw;
   margin-top: 20vh;
 
-  column-gap: 25px;
+  column-gap: 30px;
 
   overflow-wrap: anywhere;
 
@@ -168,11 +168,10 @@ li:active {
 .main-content {
   display: grid;
   grid-template-areas: 'project-card task-container';
-  grid-template-columns: 170px 1fr;
-  grid-template-rows: 30px;
+  grid-template-columns: 200px minmax(max-content, 700px);
+  grid-template-rows: 60px;
 
-  margin-left: 20px;
-  column-gap: 60px;
+  column-gap: 20px;
 }
 
 /*=== Project card start ===*/
@@ -219,7 +218,6 @@ li:active {
 .task-container {
   grid-area: task-container;
   display: grid;
-  grid-template-columns: minmax(400px, 500px);
 
   row-gap: 10px;
 }
