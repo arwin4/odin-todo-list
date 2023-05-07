@@ -38,7 +38,7 @@ body {
 
   column-gap: 30px;
 
-  overflow-wrap: anywhere;
+  /* overflow-wrap: anywhere; */
 
   background-color: var(--cream);
 }
@@ -168,7 +168,7 @@ li:active {
 .main-content {
   display: grid;
   grid-template-areas: 'project-card task-container';
-  grid-template-columns: 200px minmax(max-content, 700px);
+  grid-template-columns: 200px 500px;
   grid-template-rows: 60px;
 
   column-gap: 20px;
@@ -177,8 +177,6 @@ li:active {
 /*=== Project card start ===*/
 
 .project-card {
-  grid-area: project-card;
-
   display: flex;
   flex-direction: column;
 
@@ -218,6 +216,8 @@ li:active {
 .task-container {
   grid-area: task-container;
   display: grid;
+  max-width: 500px;
+  word-break: break-all;
 
   row-gap: 10px;
 }
